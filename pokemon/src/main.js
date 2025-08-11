@@ -24,6 +24,7 @@ k.loadSpriteAtlas("sprites/characters.png", {
         anims: {'spider': 1, 'centipede': 2, 'grass' : 3}
     },
 })
+k.loadSprite("battle-background", "./assets/battleBackground.png");
 k.loadSpriteAtlas("sprites/tiles.png", {
     'tile' : {x: 0, y:0 , width : 128, height: 128, sliceX: 8, sliceY : 8,
         anims: {
