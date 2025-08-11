@@ -55,5 +55,7 @@ k.loadSpriteAtlas("sprites/tiles.png", {
     }
 })
 
+k.scene('world',(worldState) => setWorld(worldState));
+k.scene('batte',(worldState) => setBattle(worldState));
 
-k.onClick(() => k.addKaboom(k.mousePos()));
+k.go('world');
