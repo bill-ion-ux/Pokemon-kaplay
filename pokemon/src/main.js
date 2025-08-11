@@ -38,6 +38,7 @@ k.loadSpriteAtlas("sprites/tiles.png", {
             'grass-tr' : 19,
             'grass-l' : 25,
             'grass-r' : 27,
+            'door': 16,
             'grass-bl' : 33,
             'grass-mb' : 34,
             'grass-br' : 35,
@@ -59,3 +60,4 @@ k.scene('world',(worldState) => setWorld(worldState));
 k.scene('batte',(worldState) => setBattle(worldState));
 
 k.go('world');
+export default k;
