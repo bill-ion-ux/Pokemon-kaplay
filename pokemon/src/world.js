@@ -55,22 +55,18 @@ function setWorld(worldState){
         
     }),
     k.addLevel([
-        "1, 2, 1, 2,               ",
-        "3, 4, 3, 4,           ",
-        "            0,   0        ",
-        "            0, 0,   0, 0  ",
-        "                0         ",
-        "       1,2,     1   ",
-        "5,     3,4,     1      ",
-        "6                        ",
-        "                          ",
-        "                          ",
-        "                          ",
-        "                          ",
-        "                          ",
-        "                          ",
-        "                          ",
-        "                          "
+        "1212              ",
+        "3434              ",
+        "          0  0    ",
+        "    0 0   00 0    ",
+        "            0     ",
+        "    12    0 0 0   ",
+        "5   34     0      ",
+        "6                 ",
+        "                  ",
+        "                  ",
+        "                  ",
+        "                  "
 
         ],{
             tileWidth: 16,
@@ -85,6 +81,49 @@ function setWorld(worldState){
             6: () => makeTile("tree-b"),
         },
 
-        })
+        }),
+    k.addLevel([
+        "000000000000000000",
+        "1111             0",
+        "                 0",
+        "                 0",
+        "    2   2        0",
+        "    23332        0",
+        "3333311           0",
+        "1                0",
+        "                 0",
+        "      000000000000",
+        "0000000           ",
+        "                  "
+
+    ],{
+         tileWidth: 16,
+        tileHeight: 16,
+        tiles: {
+          0: () => [
+            area({ shape: new Rect(vec2(0), 16, 16) }),
+            body({ isStatic: true }),
+          ],
+          1: () => [
+            area({
+              shape: new Rect(vec2(0), 8, 8),
+              offset: vec2(4, 4),
+            }),
+            body({ isStatic: true }),
+          ],
+          2: () => [
+            area({ shape: new Rect(vec2(0), 2, 16) }),
+            body({ isStatic: true }),
+          ],
+          3: () => [
+            area({
+              shape: new Rect(vec2(0), 16, 20),
+              offset: vec2(0, -4),
+            }),
+            body({ isStatic: true }),
+          ],
+        }
+    }),
         ];
-}
+    
+    }
