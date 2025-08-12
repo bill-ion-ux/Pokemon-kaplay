@@ -1,4 +1,3 @@
-import { Rect } from "kaplay";
 import k from "./main.js";
 
 export function setWorld(worldState){
@@ -267,21 +266,36 @@ export function setWorld(worldState){
     }
     player.onCollide('npc', () => {
         player.isInDialogue = true;
-        const dialogueBoxFixedContainer = k.add([fixed()]);
+        const dialogueBoxFixedContainer = k.add([k.fixed()]);
         const dialogueBox = dialogueBoxFixedContainer.add([
             k.rect(1000,200),
             k.outline(5),
-            pos(150, 500),
-            fixed()
+            k.pos(150, 500),
+            k.fixed()
         ])
-        const dialogue = "Defeat all the monsteres on this land and you'll become the champion!";
-        const content = dialogue.add([
+        const dialogue = "Defeat all the monsters on this land and you'll become the champion!";
+        const content = dialogueBox.add([
             k.text('',{
                 size: 42,
                 width: 900,
                 lineSpacing: 15,
-            })
-        ])
+            }),
+            k.color(10,10,10),
+            k.pos(40,30),
+            k.fixed(),
+        ]);
+        if(worldState.faintedMons < 4){
+            content.text = dialogue;
+        }else{
+            content.text = "You're the champion";
+        }
+        k.onUpdate(() => {
+            if(isKeyDown('space')){
+                k.destroy(dialogueBox);
+                player.isInDialogue = false;
+            }
+        })
+
     })
 
 }
