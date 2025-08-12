@@ -24,8 +24,7 @@ export function setWorld(worldState){
         "h     h     h     ",
         "h     h           ",
         ],
-       
-    {
+       {
         /**
          * 7 -> 1,  9 ->2 , 15 -> 2, 17 -> 3, 18 -> 4, 19 -> 5, 20 -> 6 , 21 -> 7, 26 -> 8, 
          * 28 -> 9 , 34 -> a, 35 -> b, 36 -> c, 42 -> e, 43 -> f, 44 -> g, 61 -> h 
@@ -83,7 +82,7 @@ export function setWorld(worldState){
 
         }),
     k.addLevel([
-        "000000000000000000",
+        "0000000000000000000",
         "1111              0",
         "                  0",
         "                  0",
@@ -97,7 +96,7 @@ export function setWorld(worldState){
         "                  "
 
     ],{
-        ileWidth: 16,
+        tileWidth: 16,
         tileHeight: 16,
         tiles: {
           0: () => [
@@ -125,13 +124,132 @@ export function setWorld(worldState){
         }
     }),
         ];
-          for (const layer of map) {
-    layer.use(scale(4));
-    for (const tile of layer.children) {
-      if (tile.type) {
-        tile.play(tile.type);
-      }
+    for (const layer of map) {
+        layer.use(scale(4));
+        for (const tile of layer.children) {
+        if (tile.type) {
+            tile.play(tile.type);
+        }
+        }
+    };
+    k.add([
+        sprite("mini-mons"),
+        area(),
+        body({ isStatic: true }),
+        pos(100, 700),
+        scale(4),
+        "cat",
+    ]);
+
+    const spiderMon = k.add([
+        sprite("mini-mons"),
+        area(),
+        body({ isStatic: true }),
+        pos(100, 440),
+        scale(4),
+        "spider",
+    ]);
+    spiderMon.play("spider");
+    spiderMon.flipX = true;
+
+    const centipedeMon = k.add([
+        sprite("mini-mons"),
+        area(),
+        body({ isStatic: true }),
+        pos(100, 100),
+        scale(4),
+        "centipede",
+    ]);
+    centipedeMon.play("centipede");
+
+    const grassMon = k.add([
+        sprite("mini-mons"),
+        area(),
+        body({ isStatic: true }),
+        pos(700, 470),
+        scale(4),
+        "grass",
+    ]);
+    grassMon.play("grass");
+    k.add([
+        sprite("npc"),
+        scale(4),
+        pos(600, 200),
+        area(),
+        body({ isStatic: true }),
+        "npc",
+    ]);
+
+    const player = k.add([
+        sprite('player-down'),
+        pos(500,200),
+        scale(4),
+        area(),
+        body(),
+        {
+            currentSprite: 'player-down',
+            speed: 300,
+            isInDialogue: false
+        }
+
+    ]);
+    let tick = 0;
+    k.onUpdate(() => {
+        camPos(player.pos);
+        tick++;
+        if (
+        (isKeyDown("down") || isKeyDown("up")) &&
+        tick % 20 === 0 &&
+        !player.isInDialogue
+        ) {
+        player.flipX = !player.flipX;
+        }
+    });
+    function setSprite(player, spriteName) {
+        if (player.currentSprite !== spriteName) {
+        player.use(sprite(spriteName));
+        player.currentSprite = spriteName;
+        }
     }
-  }
-    
+
+    k.onKeyDown("down", () => {
+        if (player.isInDialogue) return;
+        setSprite(player, "player-down");
+        player.move(0, player.speed);
+    });
+
+    k.onKeyDown("up", () => {
+        if (player.isInDialogue) return;
+        setSprite(player, "player-up");
+        player.move(0, -player.speed);
+    });
+
+    k.onKeyDown("left", () => {
+        if (player.isInDialogue) return;
+        player.flipX = false;
+        if (player.curAnim() !== "walk") {
+        setSprite(player, "player-side");
+        player.play("walk");
+        }
+        player.move(-player.speed, 0);
+    });
+
+    k.onKeyDown("right", () => {
+        if (player.isInDialogue) return;
+        player.flipX = true;
+        if (player.curAnim() !== "walk") {
+        setSprite(player, "player-side");
+        player.play("walk");
+        }
+        player.move(player.speed, 0);
+    });
+
+    k.onKeyRelease("left", () => {
+        player.stop();
+    });
+
+    k.onKeyRelease("right", () => {
+        player.stop();
+    });
+
 }
