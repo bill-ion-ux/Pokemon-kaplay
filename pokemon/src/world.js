@@ -1,3 +1,4 @@
+import { Rect } from "kaplay";
 import k from "./main.js";
 
 export function setWorld(worldState){
@@ -9,20 +10,21 @@ export function setWorld(worldState){
     }
     const map = [
         k.addLevel([
-        "455555555555555556",
-        "822222222222222229",
-        "822222222222222229",
-        "822222222222222229",
-        "822abbbc2222222229",
-        "abbefffg2222222229",
-        "ef3f22222222222229",
-        "111122222222222229",
-        "111122222222222229",
-        "222222277777777777",
-        "7777777           ",
-        "                  ",
-        "h     h     h     ",
-        "h     h           ",
+        "                   ",
+        " 455555555555555556",
+        " 822222222222222229",
+        " 822222222222222229",
+        " 822222222222222229",
+        " 822abbbc2222222229",
+        " abbefffg2222222229",
+        " ef3f22222222222229",
+        " 111122222222222229",
+        " 111122222222222229",
+        " 222222277777777777",
+        " 7777777           ",
+        "                   ",
+        "h     h     h      ",
+        "h     h            ",
         ],
        {
         /**
@@ -54,18 +56,19 @@ export function setWorld(worldState){
         
     }),
     k.addLevel([
-        "1212              ",
-        "3434              ",
-        "          0  0    ",
-        "    0 0   00 0    ",
-        "            0     ",
-        "    12    0 0 0   ",
-        "5   34     0      ",
-        "6                 ",
-        "                  ",
-        "                  ",
-        "                  ",
-        "                  "
+        "                   ",
+        " 1212              ",
+        " 3434              ",
+        "          0  0     ",
+        "    0 0   00 0     ",
+        "            0      ",
+        "     12    0 0 0   ",
+        " 5   34     0      ",
+        " 6                 ",
+        "                   ",
+        "                   ",
+        "                   ",
+        "                   "
 
         ],{
             tileWidth: 16,
@@ -83,17 +86,18 @@ export function setWorld(worldState){
         }),
     k.addLevel([
         "0000000000000000000",
-        "1111              0",
-        "                  0",
-        "                  0",
-        "   2    2         0",
-        "   233332         0",
+        "111               0",
+        "0                 0",
+        "0                 0",
+        "0                 0",
+        "0   2    2        0",
+        "0   233332        0",
         "333331            0",
-        "1                 0",
-        "                  0",
-        "       000000000000",
-        "0000000           ",
-        "                  "
+        "01                0",
+        "0                 0",
+        "0                 0",
+        "0      000000000000",
+        "0000000             "
 
     ],{
         tileWidth: 16,
@@ -136,7 +140,7 @@ export function setWorld(worldState){
         sprite("mini-mons"),
         area(),
         body({ isStatic: true }),
-        pos(100, 700),
+        pos(1100, 500),
         scale(4),
         "cat",
     ]);
@@ -145,7 +149,7 @@ export function setWorld(worldState){
         sprite("mini-mons"),
         area(),
         body({ isStatic: true }),
-        pos(100, 440),
+        pos(120, 480),
         scale(4),
         "spider",
     ]);
@@ -156,7 +160,7 @@ export function setWorld(worldState){
         sprite("mini-mons"),
         area(),
         body({ isStatic: true }),
-        pos(100, 100),
+        pos(100, 200),
         scale(4),
         "centipede",
     ]);
@@ -251,5 +255,33 @@ export function setWorld(worldState){
     k.onKeyRelease("right", () => {
         player.stop();
     });
+    if(!worldState){
+        worldState = {
+            playerPos : player.pos,
+            faintedMons : [],
+        };
+    }
+    player.pos = k.vec2(worldState.playerPos);
+    for(const faintedMons of worldState.faintedMons){
+        k.destroy(k.get(faintedMons));
+    }
+    player.onCollide('npc', () => {
+        player.isInDialogue = true;
+        const dialogueBoxFixedContainer = k.add([fixed()]);
+        const dialogueBox = dialogueBoxFixedContainer.add([
+            k.rect(1000,200),
+            k.outline(5),
+            pos(150, 500),
+            fixed()
+        ])
+        const dialogue = "Defeat all the monsteres on this land and you'll become the champion!";
+        const content = dialogue.add([
+            k.text('',{
+                size: 42,
+                width: 900,
+                lineSpacing: 15,
+            })
+        ])
+    })
 
 }
