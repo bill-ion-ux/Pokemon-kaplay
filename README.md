@@ -7,7 +7,16 @@ This project is for learning purposes and will help me explore:
 - Basic game loop design
 - Character movement and interactions
 - Map creation
-- Event handling in Kaplay.js
-
+- Event handling in Kaplay.js   
+- Loading assets for the game
+- Creating scenes
+- Building the world scene + creating our map
+- Creating monsters
+- Creating the player and an NPC
+- Setting up the camera
+- Setting up player movement
+- Passing data from one scene to another
+- NPC logic
+- Implementing battle mechanic + game loop
 ---
 *Work in progress — expect changes!*
