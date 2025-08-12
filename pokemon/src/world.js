@@ -262,7 +262,7 @@ export function setWorld(worldState){
     }
     player.pos = k.vec2(worldState.playerPos);
     for(const faintedMons of worldState.faintedMons){
-        k.destroy(k.get(faintedMons));
+        destroy(k.get(faintedMons)[0]);
     }
     player.onCollide('npc', () => {
         player.isInDialogue = true;
