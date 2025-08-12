@@ -1,5 +1,7 @@
 import kaplay from "kaplay";
 import { setWorld } from './world.js';
+import { setBattle } from './battle.js';
+
 // import "kaplay/global"; // uncomment if you want to use without the k. prefix
 
 const k = kaplay({

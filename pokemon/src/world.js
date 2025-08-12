@@ -298,18 +298,18 @@ export function setWorld(worldState){
 
     })
     function flashScreen() {
-        const flash = add([
-        rect(1280, 720),
-        color(10, 10, 10),
-        fixed(),
-        opacity(0),
+        const flash = k.add([
+        k.rect(1280, 720),
+        k.color(10, 10, 10),
+        k.fixed(),
+        k.opacity(0),
         ]);
-        tween(
+        k.tween(
         flash.opacity,
         1,
         0.5,
         (val) => (flash.opacity = val),
-        easings.easeInBounce
+        k.easings.easeInBounce
         );
     }
 
