@@ -1,4 +1,5 @@
 import kaplay from "kaplay";
+import { setWorld } from './world.js';
 // import "kaplay/global"; // uncomment if you want to use without the k. prefix
 
 const k = kaplay({
@@ -8,6 +9,7 @@ const k = kaplay({
 });
 
 k.loadRoot("./"); // A good idea for Itch.io publishing later
+k.setBackground(Color.fromHex("#36A6E0"));
 k.loadSpriteAtlas("sprites/characters.png", {
     'player-down' : { x: 0, y: 82, width: 16, height: 16},
     'player-up' : { x: 16, y: 82, width: 16, height: 16},
@@ -24,10 +26,11 @@ k.loadSpriteAtlas("sprites/characters.png", {
         anims: {'spider': 1, 'centipede': 2, 'grass' : 3}
     },
 })
-k.loadSprite("battle-background", "./assets/battleBackground.png");
+k.loadSprite("battle-background", "sprites/battleBackground.png");
 k.loadSpriteAtlas("sprites/tiles.png", {
     'tile' : {x: 0, y:0 , width : 128, height: 128, sliceX: 8, sliceY : 8,
         anims: {
+            'deco':0,
             'bigtree-pt1' : 1,
             'bigtree-pt2' : 2,
             'bigtree-pt3' : 9,
@@ -57,7 +60,7 @@ k.loadSpriteAtlas("sprites/tiles.png", {
 })
 
 k.scene('world',(worldState) => setWorld(worldState));
-k.scene('batte',(worldState) => setBattle(worldState));
+k.scene('battle',(worldState) => setBattle(worldState));
 
 k.go('world');
 export default k;

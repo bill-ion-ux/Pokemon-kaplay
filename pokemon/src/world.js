@@ -1,6 +1,6 @@
 import k from "./main.js";
 
-function setWorld(worldState){
+export function setWorld(worldState){
     function makeTile(type){
         return [
             sprite('tile'),
@@ -9,20 +9,20 @@ function setWorld(worldState){
     }
     const map = [
         k.addLevel([
-        "45555555555555556",
-        "8222222222222229",
-        "8222222222222229",
-        "8222222222222229",
-        "822abbbc22222229",
-        "abbefffg222222229",
+        "455555555555555556",
+        "822222222222222229",
+        "822222222222222229",
+        "822222222222222229",
+        "822abbbc2222222229",
+        "abbefffg2222222229",
         "ef3f22222222222229",
-        "11112222222222229",
-        "11112222222222229",
-        "22222777777777777",
-        "7777777",
-        "       ",
-        "h     h     h",
-        "h     h",
+        "111122222222222229",
+        "111122222222222229",
+        "222222277777777777",
+        "7777777           ",
+        "                  ",
+        "h     h     h     ",
+        "h     h           ",
         ],
        
     {
@@ -72,7 +72,7 @@ function setWorld(worldState){
             tileWidth: 16,
             tileHeight: 16,
             tiles: {
-            0: () => makeTile(),
+            0: () => makeTile("deco"),
             1: () => makeTile("bigtree-pt1"),
             2: () => makeTile("bigtree-pt2"),
             3: () => makeTile("bigtree-pt3"),
@@ -84,20 +84,20 @@ function setWorld(worldState){
         }),
     k.addLevel([
         "000000000000000000",
-        "1111             0",
-        "                 0",
-        "                 0",
-        "    2   2        0",
-        "    23332        0",
-        "3333311           0",
-        "1                0",
-        "                 0",
-        "      000000000000",
+        "1111              0",
+        "                  0",
+        "                  0",
+        "   2    2         0",
+        "   233332         0",
+        "333331            0",
+        "1                 0",
+        "                  0",
+        "       000000000000",
         "0000000           ",
         "                  "
 
     ],{
-         tileWidth: 16,
+        ileWidth: 16,
         tileHeight: 16,
         tiles: {
           0: () => [
@@ -125,5 +125,13 @@ function setWorld(worldState){
         }
     }),
         ];
-    
+          for (const layer of map) {
+    layer.use(scale(4));
+    for (const tile of layer.children) {
+      if (tile.type) {
+        tile.play(tile.type);
+      }
     }
+  }
+    
+}
