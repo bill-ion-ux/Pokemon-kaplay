@@ -27,8 +27,8 @@ This project is for learning purposes and will help me explore:
 
 ## Screenshot
 
-![Gameplay Screenshot](sprites/gamePlay.png)
+![Gameplay Screenshot](public/sprites/gamePlay.png)
 
 ## Debug View – Collision Boxes & Hit Areas
 
-![collision Screenshot](sprites/collision.png)
+![collision Screenshot](public/sprites/collision.png)
