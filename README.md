@@ -29,6 +29,11 @@ This project is for learning purposes and will help me explore:
 
 ![Gameplay Screenshot](pokemon/public/sprites/gamePlay.png)
 
+## Battle Mode
+
+![Battle Screenshot](pokemon/public/sprites/battle.png)
+
 ## Debug View – Collision Boxes & Hit Areas
 
-![collision Screenshot](pokemon/public/sprites/collision.png)
+![Collision Screenshot](pokemon/public/sprites/collision.png)
+
